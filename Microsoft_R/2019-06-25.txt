@@ -1,0 +1,9 @@
+기존 R-Studio 경로 : C:\Program Files\R\R-3.6.0
+
+바꾼 경로 : C:\Program Files\Microsoft\R Client\R_SERVER
+
+tool은 R Studio인데, 경로 바뀜
+
+
+몫 %/%
+나머지 %%

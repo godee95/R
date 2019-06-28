@@ -1,0 +1,13 @@
+1. machine learning server install
+Home>
+Marketplace>
+Machine Learning Server Operationalization>
+Create Machine Learning Server Operationalization
+
+2. azure database install
+데이터베이스 이름 : AirlineData
+서버 명 :
+
+admin2019
+Pa200rd.56$$
+
