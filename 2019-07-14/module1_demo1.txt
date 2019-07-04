@@ -1,0 +1,62 @@
+﻿< 머신러닝을 이용 데이터 처리 >
+1. portal.azure.com에 가서 SQL database를 생성
+2. WideWorldImporters-Standard.part1.exe를 설치
+3. Microsoft SQL Server Management Studio에 접속해
+	생성한 SQL Server로 접속
+4. 데이터베이스에 마우스 우클릭 - 데이터 계층 응용 프로그램 가져오기
+5. WideWorldImporters-Standard.bacpac있는 파일 경로 입력해 데이터 가져오기
+6. 다시 portal.azure.com으로 돌아와 WideWorldImporters-Standard - Query editor 클릭
+7. Login, Password입력 후, table 업로드 확인
+8. sql문에 다음 commands를 입력
+
+CREATE SCHEMA [20774A] AUTHORIZATION db_owner;
+GO
+EXECUTE sp_addextendedproperty @name = N'Description',
+    @value = N'Schema for AzureML data import.', @level0type = N'SCHEMA', @level0name = N'20774A';
+
+9. 입력된 commands를 삭제한 후 다음 commands를 입력
+
+IF EXISTS (SELECT * FROM sys.views WHERE name = '[CustomerTransactions]')
+    DROP VIEW [20774A].[CustomerTransactions]
+GO
+
+CREATE VIEW [20774A].[CustomerTransactions]
+AS
+SELECT customers.CustomerName,
+    CAST( [TransactionAmount] AS REAL) AS TransactionAmount,
+    CAST([OutstandingBalance] AS REAL) AS OutstandingBalance,
+    CAST([TaxAmount] AS REAL) AS TaxAmount,
+    [TransactionDate]
+FROM [Sales].[Customers] AS customers
+LEFT OUTER JOIN [Sales].[CustomerTransactions] AS customertransactions
+ON customers.CustomerID = customertransactions.CustomerID;
+
+10. studio.azureml.net에 접속해 EXPERIMENTS - NEW - Blank Experiment
+11. Import Data - Lanch Import Data Wizard - Azure SQL Database
+	- 해당 항목 선택 후 - test connection 확인
+12. Database query에 다음 command입력
+
+SELECT * FROM [20774A].[CustomerTransactions]
+
+13. Summarize Data - Visualize해서
+	총 97,547rows와 요약된 데이터 확인
+	CustormerName의 count와
+	다른 feature의 count가 400rows 차이남
+	이는 400rows가 missing values라는 걸 의미함
+※ 이는 이미지 첨부함
+
+14. Clean Missing Data - Visualize해서
+	400rows의 missing data 제거 된걸 확인
+	데이터 전처리를 의미함
+※ 이는 이미지 첨부함
+
+15. Clip Values - Visualize해서
+	임계치를 Constant로 설정
+	모든 values가 최대임계치 25000보다
+	낮음 값을 가짐을 확인할 수 있음
+	데이터 전처리를 의미함
+※ 이는 이미지 첨부함
+
+
+전체적으로 summarize module을 이용해 전처리 전의 데이터의 문제점을 발견
+Clip Values와 Clean missing data를 이용해 missing 데이터를 제거해준다.
