@@ -1,0 +1,33 @@
+# 배열 50행 4열 출력
+np.random.rand(50, 4)
+
+# 배열을 데이터 프레임 형태로 변환
+import pandas as pd
+df = pd.DataFrame(np.random.rand(50,4))
+df
+
+
+# x와 y를 변경해가변 산점도 그래프 출력
+from matplotlib import pyplot as plt
+plt.figure(figsize = (10,10))
+
+plt.subplot(221)
+plt.xlabel('df[0]')
+plt.ylabel('df[1]')
+plt.scatter(df[0], df[1], color = 'red' )
+
+plt.subplot(222)
+plt.xlabel('df[0]')
+plt.ylabel('df[2]')
+plt.scatter(df[0], df[2], color = 'b' )
+
+plt.subplot(223)
+plt.xlabel('df[0]')
+plt.ylabel('df[3]')
+plt.scatter(df[0], df[3], color = 'g' )
+
+plt.subplot(224)
+plt.xlabel('df[2]')
+plt.ylabel('df[3]')
+plt.scatter(df[2], df[3], color = 'purple' )
+plt.show()

@@ -1,0 +1,6 @@
+select emp.emp_no as '사번',
+dep.emp_no as '부서코드', 
+dpt.dept_name as '부서명' 
+	from employees as emp, dept_emp as dep, departments as dpt
+	where emp.emp_no = dep.emp_no
+		and dep.dept_no = dpt.dept_no;

@@ -1,0 +1,5 @@
+data <- mtcars[,c('wt','mpg')]
+data
+plot(x = data$wt, y = data$mpg,
+     ylab = "mpg", xlab = "wt", main = "»êÁ¡µµ",
+     col = c("red", "blue") )
