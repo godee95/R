@@ -1,0 +1,28 @@
+* 입력를 사용하여 다음을 출력하시오.
+data = {'count': 2,
+        'text': '1',
+        'values': [{'count': 3,
+                  'text': '1.1',
+                  'values': [{'count': 1,
+                            'text': '1.1.1',
+                            'values': [{'count':0,
+                                      'text': '1.1.1.1',
+                                      'values': []}]},
+                           {'count': 0,
+                            'text': '1.1.2',
+                            'values': []},
+                           {'count': 0,
+                            'text': '1.1.3',
+                            'values': []}]},
+                 {'count': 0,
+                  'text': '1.2',
+                  'values': []}]}
+
+* 출력결과
+ 1
+  1.1
+   1.1.1
+    1.1.1.1
+   1.1.2
+   1.1.3
+  1.2
